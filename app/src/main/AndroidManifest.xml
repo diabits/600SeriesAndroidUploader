@@ -84,6 +84,10 @@
         <receiver android:name=".upload.nightscout.NightscoutUploadReceiver" />
         <receiver android:name=".xdrip_plus.XDripPlusUploadReceiver" />
 
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="3daf498bd4562747e5e22c8db4126a1e68a0ec7e"
+            />
     </application>
 
 </manifest>
