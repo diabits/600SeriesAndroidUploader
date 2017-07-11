@@ -5,3 +5,11 @@ local.properties
 .idea
 bugfender.properties
 /app/app.iml
+
+# Intellij
+.idea/
+*.iml
+*.iws
+
+*.class
+*.log
