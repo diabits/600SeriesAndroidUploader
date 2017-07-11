@@ -74,6 +74,9 @@
             android:name=".upload.nightscout.NightscoutUploadIntentService"
             android:icon="@drawable/ic_launcher" />
         <service
+            android:name=".upload.diabits.DiabitsUploadIntentService"
+            android:icon="@drawable/ic_launcher" />
+        <service
             android:name=".xdrip_plus.XDripPlusUploadIntentService"
             android:icon="@drawable/ic_launcher" />
         <service
@@ -82,6 +85,7 @@
 
         <receiver android:name=".medtronic.service.MedtronicCnlAlarmReceiver" />
         <receiver android:name=".upload.nightscout.NightscoutUploadReceiver" />
+        <receiver android:name=".upload.diabits.DiabitsUploadReceiver" />
         <receiver android:name=".xdrip_plus.XDripPlusUploadReceiver" />
 
         <meta-data

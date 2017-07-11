@@ -22,6 +22,7 @@
     <string name="preference_eula_accepted">IUNDERSTAND</string>
     <string name="preference_enable_rest_upload">EnableRESTUpload</string>
     <string name="preference_enable_xdrip_plus">EnablexDripPlusUpload</string>
+    <string name="preference_enable_diabits_upload">EnableDiabitsUpload</string>
     <string name="error_msg_api_secret_length">API Secret must be 12 characters or longer.</string>
     <string name="text_unit_mmolxl">mmol/L</string>
     <string name="text_unit_mgxdl">mg/dL</string>
@@ -30,6 +31,7 @@
     <string name="menu_name_battery_status">unknown</string>
     <string name="preference_api_secret">YOUR.API.SECRET</string>
     <string name="preference_nightscout_url">YOUR.NIGHTSCOUT.URL</string>
+    <string name="preference_diabits_hostname">api.diabits.org</string>
 
     <string name="preferences_poll_interval">Poll interval</string>
     <string name="preferences_low_battery_poll_interval">Poll interval on low pump battery</string>

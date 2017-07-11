@@ -79,6 +79,20 @@
             android:summary="Enable local broadcast of data to xDrip+"
             android:title="Send to xDrip+"/>
     </PreferenceCategory>
+    <PreferenceCategory android:title="Diabits">
+        <CheckBoxPreference
+            android:disableDependentsState="false"
+            android:key="@string/preference_enable_diabits_upload"
+            android:summary="Enable upload of data to Diabits Link"
+            android:title="Enable Upload"/>
+        <EditTextPreference
+            android:defaultValue="api.diabits.org"
+            android:dependency="@string/preference_enable_diabits_upload"
+            android:dialogMessage="The Hostname of Diabits API"
+            android:dialogTitle="Enter Diabits API Hostname"
+            android:key="@string/preference_diabits_hostname"
+            android:title="Diabits API Hostname"/>
+    </PreferenceCategory>
     <PreferenceCategory android:title="Disclaimer">
         <SwitchPreference
             android:disableDependentsState="false"

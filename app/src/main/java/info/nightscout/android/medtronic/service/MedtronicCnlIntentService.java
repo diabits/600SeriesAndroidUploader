@@ -34,6 +34,7 @@ import info.nightscout.android.medtronic.message.MessageUtils;
 import info.nightscout.android.model.medtronicNg.ContourNextLinkInfo;
 import info.nightscout.android.model.medtronicNg.PumpInfo;
 import info.nightscout.android.model.medtronicNg.PumpStatusEvent;
+import info.nightscout.android.upload.diabits.DiabitsUploadReceiver;
 import info.nightscout.android.upload.nightscout.NightscoutUploadReceiver;
 import info.nightscout.android.utils.ConfigurationStore;
 import info.nightscout.android.utils.DataStore;
@@ -400,6 +401,7 @@ public class MedtronicCnlIntentService extends IntentService {
     private void uploadPollResults() {
         sendToXDrip();
         uploadToNightscout();
+        uploadToDiabits();
     }
 
     private void sendToXDrip() {
@@ -416,6 +418,13 @@ public class MedtronicCnlIntentService extends IntentService {
     private void uploadToNightscout() {
         // TODO - set status if offline or Nightscout not reachable
         Intent receiverIntent = new Intent(this, NightscoutUploadReceiver.class);
+        final long timestamp = System.currentTimeMillis() + 1000L;
+        final PendingIntent pendingIntent = PendingIntent.getBroadcast(this, (int) timestamp, receiverIntent, PendingIntent.FLAG_ONE_SHOT);
+        wakeUpIntent(getApplicationContext(), timestamp, pendingIntent);
+    }
+
+    private void uploadToDiabits() {
+        Intent receiverIntent = new Intent(this, DiabitsUploadReceiver.class);
         final long timestamp = System.currentTimeMillis() + 1000L;
         final PendingIntent pendingIntent = PendingIntent.getBroadcast(this, (int) timestamp, receiverIntent, PendingIntent.FLAG_ONE_SHOT);
         wakeUpIntent(getApplicationContext(), timestamp, pendingIntent);
