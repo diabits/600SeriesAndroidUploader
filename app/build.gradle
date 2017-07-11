@@ -76,10 +76,10 @@ android {
 
     signingConfigs {
         release {
-//            storeFile file(RELEASE_STORE_FILE)
-//            storePassword RELEASE_STORE_PASSWORD
-//            keyAlias RELEASE_KEY_ALIAS
-//            keyPassword RELEASE_KEY_PASSWORD
+            storeFile file('release_store')
+            storePassword 'dedede123'
+            keyAlias 'release_key'
+            keyPassword 'dedede123'
         }
     }
 
@@ -107,7 +107,6 @@ release {
 
 dependencies {
     compile files('libs/slf4j-api-1.7.2.jar')
-
     compile 'com.android.support:support-v13:25.3.1'
     compile 'com.android.support:design:25.3.1'
     compile 'com.android.support:appcompat-v7:25.3.1'
@@ -121,15 +120,12 @@ dependencies {
     compile 'com.google.code.gson:gson:2.7'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
-
     compile('com.crashlytics.sdk.android:crashlytics:2.6.8@aar') {
         transitive = true;
     }
-
     // The version of okhttp3 *must* be the same as the version in AppUpdater
     compile 'com.squareup.okhttp3:okhttp:3.6.0'
     compile 'com.squareup.okhttp3:logging-interceptor:3.6.0'
-
     compile('com.crashlytics.sdk.android:crashlytics:2.6.7@aar') {
         transitive = true;
     }
