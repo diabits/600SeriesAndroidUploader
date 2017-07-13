@@ -31,7 +31,7 @@
     <string name="menu_name_battery_status">unknown</string>
     <string name="preference_api_secret">YOUR.API.SECRET</string>
     <string name="preference_nightscout_url">YOUR.NIGHTSCOUT.URL</string>
-    <string name="preference_diabits_hostname">api.diabits.org</string>
+    <string name="preference_diabits_api_url">api.diabits.org</string>
 
     <string name="preferences_poll_interval">Poll interval</string>
     <string name="preferences_low_battery_poll_interval">Poll interval on low pump battery</string>

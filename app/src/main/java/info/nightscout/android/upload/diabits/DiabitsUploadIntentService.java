@@ -30,11 +30,12 @@ public class DiabitsUploadIntentService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-
         Boolean uploadEnabled = prefs.getBoolean("EnableDiabitsUpload", false);
         if (!uploadEnabled) {
             return;
         }
+
+        Log.i(Tag, "Uploading to Diabits Platform");
 
         Realm mRealm = Realm.getDefaultInstance();
         RealmResults<PumpStatusEvent> records = mRealm
@@ -43,16 +44,10 @@ public class DiabitsUploadIntentService extends IntentService {
                 .notEqualTo("sgv", 0)
                 .findAll();
 
-        uploadRecords(records);
+        DiabitsUploader uploader = new DiabitsUploader();
+        uploader.upload(records);
+
         mRealm.close();
         DiabitsUploadReceiver.completeWakefulIntent(intent);
-    }
-
-    private void uploadRecords(RealmResults<PumpStatusEvent> records) {
-        if (records.size() <= 0) {
-            return;
-        }
-
-        Log.i(Tag, String.format("Starting upload of %s record using a Diabits API", records.size()));
     }
 }

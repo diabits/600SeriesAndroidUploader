@@ -83,15 +83,15 @@
         <CheckBoxPreference
             android:disableDependentsState="false"
             android:key="@string/preference_enable_diabits_upload"
-            android:summary="Enable upload of data to Diabits Link"
+            android:summary="Enable upload of data to Diabits Platform"
             android:title="Enable Upload"/>
         <EditTextPreference
             android:defaultValue="api.diabits.org"
             android:dependency="@string/preference_enable_diabits_upload"
-            android:dialogMessage="The Hostname of Diabits API"
-            android:dialogTitle="Enter Diabits API Hostname"
-            android:key="@string/preference_diabits_hostname"
-            android:title="Diabits API Hostname"/>
+            android:dialogMessage="The URL of Diabits API"
+            android:dialogTitle="Enter Diabits API URL"
+            android:key="@string/preference_diabits_url"
+            android:title="Diabits API URL"/>
     </PreferenceCategory>
     <PreferenceCategory android:title="Disclaimer">
         <SwitchPreference
