@@ -90,7 +90,7 @@
             android:dependency="@string/preference_enable_diabits_upload"
             android:dialogMessage="The URL of Diabits API"
             android:dialogTitle="Enter Diabits API URL"
-            android:key="@string/preference_diabits_url"
+            android:key="@string/preference_diabits_api_url"
             android:title="Diabits API URL"/>
     </PreferenceCategory>
     <PreferenceCategory android:title="Disclaimer">

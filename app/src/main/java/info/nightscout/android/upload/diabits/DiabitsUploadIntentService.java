@@ -44,8 +44,11 @@ public class DiabitsUploadIntentService extends IntentService {
                 .notEqualTo("sgv", 0)
                 .findAll();
 
+        DiabitsUploadSpecification specification = new DiabitsUploadSpecification();
+        specification.setUri(prefs.getString("preference_diabits_api_url", "unknown"));
+
         DiabitsUploader uploader = new DiabitsUploader();
-        uploader.upload(records);
+        uploader.upload(specification, records);
 
         mRealm.close();
         DiabitsUploadReceiver.completeWakefulIntent(intent);

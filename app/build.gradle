@@ -134,4 +134,5 @@ dependencies {
     }
     compile 'com.github.javiersantos:AppUpdater:2.6.1'
     compile 'org.fusesource.mqtt-client:mqtt-client:1.12'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.0.2'
 }
