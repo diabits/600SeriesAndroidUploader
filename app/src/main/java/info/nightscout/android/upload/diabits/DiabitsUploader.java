@@ -22,24 +22,44 @@ class DiabitsUploader {
 
         Log.i(Tag, String.format("Starting upload of %s record to Diabits Platform using %s", records.size(), specification.getUri()));
 
-        for (PumpStatusEvent record : records) {
-            SensorData glucoseData = new SensorData("glucose");
-            glucoseData.addValue("type", "sgv");
-            glucoseData.addValue("date", record.getSgvDate().getTime());
-            glucoseData.addValue("direction", EntriesSerializer.getDirectionStringStatus(record.getCgmTrend()));
-            glucoseData.addValue("device", record.getDeviceName());
-            glucoseData.addValue("sgv", record.getSgv());
-            sendSensorData(glucoseData);
+        PumpStatusEvent record = records.last();
 
-            if (record.getBolusWizardBGL() != 0) {
-                SensorData bolusData = new SensorData("bolus");
-                bolusData.addValue("type", "mbg");
-                glucoseData.addValue("date", record.getSgvDate().getTime());
-                glucoseData.addValue("device", record.getDeviceName());
-                glucoseData.addValue("bolus", record.getBolusWizardBGL());
-                sendSensorData(bolusData);
-            }
-        }
+        SensorData glucoseData = new SensorData("glucose");
+        glucoseData.addValue("type", "glucose");
+        glucoseData.addValue("date", record.getSgvDate().getTime());
+        glucoseData.addValue("device", record.getDeviceName());
+        glucoseData.addValue("level", record.getSgv());
+        glucoseData.addValue("trend", EntriesSerializer.getDirectionStringStatus(record.getCgmTrend()));
+        sendSensorData(glucoseData);
+
+        SensorData bolusData = new SensorData("bolus");
+        bolusData.addValue("type", "bolus");
+        bolusData.addValue("date", record.getSgvDate().getTime());
+        bolusData.addValue("device", record.getDeviceName());
+        bolusData.addValue("glucose", record.getBolusWizardBGL());
+        bolusData.addValue("running", record.isBolusing());
+        sendSensorData(bolusData);
+
+        SensorData basalData = new SensorData("basal");
+        basalData.addValue("type", "basal");
+        basalData.addValue("date", record.getSgvDate().getTime());
+        basalData.addValue("device", record.getDeviceName());
+        basalData.addValue("rate", record.getBasalRate());
+        basalData.addValue("tempRate", record.getTempBasalRate());
+        basalData.addValue("tempPercentage", record.getTempBasalPercentage());
+        sendSensorData(basalData);
+
+        SensorData insulinData = new SensorData("insulin");
+        insulinData.addValue("type", "insulin");
+        insulinData.addValue("date", record.getSgvDate().getTime());
+        insulinData.addValue("device", record.getDeviceName());
+        insulinData.addValue("active", record.getActiveInsulin());
+        sendSensorData(insulinData);
+
+        SensorData statusData = new SensorData("status");
+        statusData.addValue("battery", record.getBatteryPercentage());
+        statusData.addValue("reservoir", record.getReservoirAmount());
+        sendSensorData(statusData);
     }
 
     private void sendSensorData(SensorData sensorData) {
@@ -55,7 +75,7 @@ class DiabitsUploader {
             ObjectMapper mapper = new ObjectMapper();
             String payload = mapper.writeValueAsString(sensorData);
 
-            connection.publish("diabits", payload.getBytes(), QoS.AT_LEAST_ONCE, false);
+            connection.publish("diabits", payload.getBytes(), QoS.AT_LEAST_ONCE, true);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

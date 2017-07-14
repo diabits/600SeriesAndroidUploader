@@ -130,6 +130,9 @@ public class MedtronicCnlIntentService extends IntentService {
                 timePollExpected = timePollStarted;
             }
 
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
+            sendStatus("Diabits Platform URI - " + prefs.getString("preference_diabits_api_url", "unknown"));
+
             // avoid polling when too close to sensor-pump comms
             if (((timePollExpected - timePollStarted) > 5000L) && ((timePollExpected - timePollStarted) < (POLL_GRACE_PERIOD_MS + 45000L))) {
                 sendStatus("Please wait: Poll due in " + ((timePollExpected - timePollStarted) / 1000L) + " seconds");
